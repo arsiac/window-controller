@@ -41,6 +41,10 @@ namespace gc {
 		Color pixel(int x, int y);
 		HBITMAP bitmap(int x, int y, int width, int height);
 		HBITMAP bitmap(Point point, Size size);
+
+		// background mouse event
+		void leftClick(int x, int y);
+		void rightClick(int x, int y);
 	};
 }
 

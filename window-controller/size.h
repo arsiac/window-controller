@@ -6,16 +6,16 @@ namespace gc {
 	class Size
 	{
 	private:
-		int _width;
-		int _height;
+		long _width;
+		long _height;
 	public:
-		Size(int width, int height);
+		Size(long width, long height);
 		Size();
 		bool isNull();
 		bool isEmpty();
-		int width();
-		int height();
-		bool equal(int width, int height);
+		long width();
+		long height();
+		bool equal(long width, long height);
 		Size operator+(const Size s);
 		Size operator-(const Size s);
 		bool operator==(const Size s);

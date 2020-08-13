@@ -232,3 +232,20 @@ HBITMAP WindowControl::bitmap(Point point, Size size)
 {
 	return this->bitmap(point.x(), point.y(), size.width(), size.height());
 }
+
+
+void WindowControl::leftClick(int x, int y)
+{
+	long position = MAKELPARAM(x, y);
+	PostMessage(this->handle, WM_MOUSEMOVE, MK_LBUTTON, position);
+	PostMessage(this->handle, WM_LBUTTONDOWN, MK_LBUTTON, position);
+	PostMessage(this->handle, WM_LBUTTONUP, MK_LBUTTON, position);
+}
+
+void WindowControl::rightClick(int x, int y)
+{
+	long position = MAKELPARAM(x, y);
+	PostMessage(this->handle, WM_MOUSEMOVE, MK_RBUTTON, position);
+	PostMessage(this->handle, WM_RBUTTONDOWN, MK_RBUTTON, position);
+	PostMessage(this->handle, WM_RBUTTONUP, MK_RBUTTON, position);
+}

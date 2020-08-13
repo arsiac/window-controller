@@ -2,7 +2,7 @@
 
 using namespace gc;
 
-Size::Size(int width, int height)
+Size::Size(long width, long height)
 {
 	this->_width = width;
 	this->_height = height;
@@ -23,17 +23,17 @@ bool Size::isEmpty()
 	return this->_width == 0 || this->_height == 0;
 }
 
-int Size::width()
+long Size::width()
 {
 	return this->_width;
 }
 
-int Size::height()
+long Size::height()
 {
 	return this->_height;
 }
 
-bool Size::equal(int width, int height)
+bool Size::equal(long width, long height)
 {
 	return this->_width == width && this->_height == height;
 }
