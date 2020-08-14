@@ -15,7 +15,7 @@ windowcontrol.o:
 	g++ -c -o windowcontrol.o window-controller/windowcontrol.cpp
 
 package: size.o point.o color.o bitmap.o windowcontrol.o
-	ar rcs window-controller.a *.o
+	ar rcs libwindow-controller.a *.o
 
 clean:
 	del *.o
