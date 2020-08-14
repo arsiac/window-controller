@@ -139,6 +139,11 @@ bool WindowControl::resize(int width, int height)
 	return ::MoveWindow(this->handle, location.x(), location.y(), width, height, MOVEWINDOW_REPAINT);
 }
 
+bool WindowControl::resize(Size s)
+{
+	return this->resize(s.width(), s.height());
+}
+
 bool WindowControl::resizeClient(int width, int height)
 {
 	if (this->useless())
@@ -154,6 +159,11 @@ bool WindowControl::resizeClient(int width, int height)
 	}
 	Size borderSize = this->size() - this->clientSize();
 	return ::MoveWindow(this->handle, location.x(), location.y(), width + borderSize.width(), height + borderSize.height(), MOVEWINDOW_REPAINT);
+}
+
+bool WindowControl::resizeClient(Size s)
+{
+	return this->resizeClient(s.width(), s.height());
 }
 
 bool WindowControl::move(int x, int y)
@@ -172,6 +182,11 @@ bool WindowControl::move(int x, int y)
 	return ::MoveWindow(this->handle, x, y, size.width(), size.height(), MOVEWINDOW_REPAINT);
 }
 
+bool WindowControl::move(Point p)
+{
+	return this->move(p.x(), p.y());
+}
+
 bool WindowControl::moveWindow(int x, int y, int width, int height)
 {
 	if (this->useless())
@@ -180,6 +195,11 @@ bool WindowControl::moveWindow(int x, int y, int width, int height)
 		return false;
 	}
 	return ::MoveWindow(this->handle, x, y, width, height, MOVEWINDOW_REPAINT);
+}
+
+bool WindowControl::moveWindow(Point p, Size s)
+{
+	return this->moveWindow(p.x(), p.y(), s.width(), s.height());
 }
 
 Color WindowControl::pixel(int x, int y)
@@ -200,6 +220,12 @@ Color WindowControl::pixel(int x, int y)
 		}
 	}
 	return Color(::GetPixel(this->dc, x, y));
+}
+
+
+Color WindowControl::pixel(Point p)
+{
+	return this->pixel(p.x(), p.y());
 }
 
 HBITMAP WindowControl::bitmap(int x, int y, int width, int height)
@@ -242,10 +268,20 @@ void WindowControl::leftClick(int x, int y)
 	PostMessage(this->handle, WM_LBUTTONUP, MK_LBUTTON, position);
 }
 
+void WindowControl::leftClick(Point p)
+{
+	return this->leftClick(p.x(), p.y());
+}
+
 void WindowControl::rightClick(int x, int y)
 {
 	long position = MAKELPARAM(x, y);
 	PostMessage(this->handle, WM_MOUSEMOVE, MK_RBUTTON, position);
 	PostMessage(this->handle, WM_RBUTTONDOWN, MK_RBUTTON, position);
 	PostMessage(this->handle, WM_RBUTTONUP, MK_RBUTTON, position);
+}
+
+void WindowControl::rightClick(Point p)
+{
+	this->rightClick(p.x(), p.y());
 }

@@ -33,6 +33,11 @@ bool Point::equal(long x, long y)
 	return this->_x == x && this->_y == y;
 }
 
+long Point::makeLong()
+{
+	return (this->_x & 0xffff) | ((this->_y & 0xffff) << 16);
+}
+
 Point Point::operator+(const Point p)
 {
 	return Point(this->_x + p._x, this->_y + p._y);

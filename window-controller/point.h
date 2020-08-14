@@ -15,6 +15,7 @@ namespace gc {
 		long y();
 		bool isOverflow();
 		bool equal(long x, long y);
+		long makeLong();
 		Point operator+(const Point p);
 		Point operator-(const Point p);
 		bool operator==(const Point p);

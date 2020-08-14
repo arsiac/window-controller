@@ -7,7 +7,7 @@ bool Color::invalid(int v)
 	return 255 < v || v < 0;
 }
 
-Color::Color(COLORREF color)
+Color::Color(unsigned long color)
 {
 	this->color = color;
 	this->_red = GetRValue(color);
@@ -46,22 +46,22 @@ int Color::blue()
 	return this->_blue;
 }
 
-COLORREF Color::RGBQUAD2COLORREF(RGBQUAD rgbq)
+unsigned long Color::RGBQUAD2COLORREF(RGBQUAD rgbq)
 {
 	return Color::RGB2COLORREF(rgbq.rgbRed, rgbq.rgbGreen, rgbq.rgbBlue);
 }
 
-int Color::getRedValue(COLORREF color)
+int Color::getRedValue(unsigned long color)
 {
 	return GetRValue(color);
 }
 
-int Color::getGreenValue(COLORREF color)
+int Color::getGreenValue(unsigned long color)
 {
 	return GetGValue(color);
 }
 
-int Color::getBlueValue(COLORREF color)
+int Color::getBlueValue(unsigned long color)
 {
 	return GetBValue(color);
 }

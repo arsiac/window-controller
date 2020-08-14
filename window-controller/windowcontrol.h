@@ -35,16 +35,23 @@ namespace gc {
 		Size clientSize();
 		Point location();
 		bool resize(int width, int height);
+		bool resize(Size s);
 		bool resizeClient(int width, int height);
+		bool resizeClient(Size s);
 		bool move(int x, int y);
+		bool move(Point p);
 		bool moveWindow(int x, int y, int width, int height);
+		bool moveWindow(Point p, Size s);
 		Color pixel(int x, int y);
+		Color pixel(Point p);
 		HBITMAP bitmap(int x, int y, int width, int height);
 		HBITMAP bitmap(Point point, Size size);
 
 		// background mouse event
 		void leftClick(int x, int y);
+		void leftClick(Point p);
 		void rightClick(int x, int y);
+		void rightClick(Point p);
 	};
 }
 
