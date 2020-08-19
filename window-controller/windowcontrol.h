@@ -17,11 +17,8 @@ namespace gc {
 
 	public:
 		WindowControl(HWND handle);
-#ifdef UNICODE
-		WindowControl(const wchar_t* className);
-#else
+
 		WindowControl(const char* className);
-#endif // UNICODE
 
 		WindowControl();
 
@@ -34,16 +31,24 @@ namespace gc {
 		Size size();
 		Size clientSize();
 		Point location();
+
 		bool resize(int width, int height);
 		bool resize(Size s);
+
 		bool resizeClient(int width, int height);
 		bool resizeClient(Size s);
+
 		bool move(int x, int y);
 		bool move(Point p);
+
 		bool moveWindow(int x, int y, int width, int height);
 		bool moveWindow(Point p, Size s);
+
+		unsigned long getPixel(int x, int y);
+
 		Color pixel(int x, int y);
 		Color pixel(Point p);
+
 		HBITMAP bitmap(int x, int y, int width, int height);
 		HBITMAP bitmap(Point point, Size size);
 

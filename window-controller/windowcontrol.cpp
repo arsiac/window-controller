@@ -10,23 +10,11 @@ WindowControl::WindowControl(HWND handle)
 	this->dc = this->getDC();
 }
 
-#ifdef UNICODE
-
-WindowControl::WindowControl(const wchar_t* className)
-{
-	this->handle = ::FindWindowW(className, 0);
-	this->dc = this->getDC();
-}
-
-#else
-
 WindowControl::WindowControl(const char* className)
 {
 	this->handle = ::FindWindowA(className, 0);
 	this->dc = this->getDC();
 }
-
-#endif // UNICODE
 
 WindowControl::WindowControl()
 {
@@ -84,8 +72,6 @@ Size WindowControl::size()
 	if (!::GetWindowRect(this->handle, &rect))
 	{
 		cout << "WindowControl::size() => GetWindowRect() -> false" << endl;
-		/*cout << "\trect: top->" << rect.top << ", left->" << rect.left
-			<< ", bottom->" << rect.bottom << ", right: " << rect.right << endl;*/
 		return Size(-1, -1);
 	}
 	return Size(rect.right - rect.left, rect.bottom - rect.top);
@@ -157,8 +143,14 @@ bool WindowControl::resizeClient(int width, int height)
 		cout << "WindowControl::resizeClient() => location.isOverflow(() -> true" << endl;
 		return false;
 	}
-	Size borderSize = this->size() - this->clientSize();
-	return ::MoveWindow(this->handle, location.x(), location.y(), width + borderSize.width(), height + borderSize.height(), MOVEWINDOW_REPAINT);
+	RECT windowRect, clientRect;
+	if (!::GetWindowRect(this->handle, &windowRect) || !::GetClientRect(this->handle, &clientRect))
+	{
+		return false;
+	}
+	int borderWidth = clientRect.left - windowRect.left + windowRect.right - clientRect.right,
+		borderHeight = clientRect.top - windowRect.top + windowRect.bottom - clientRect.bottom;
+	return ::MoveWindow(this->handle, location.x(), location.y(), width + borderWidth, height + borderHeight, MOVEWINDOW_REPAINT);
 }
 
 bool WindowControl::resizeClient(Size s)
@@ -202,24 +194,29 @@ bool WindowControl::moveWindow(Point p, Size s)
 	return this->moveWindow(p.x(), p.y(), s.width(), s.height());
 }
 
-Color WindowControl::pixel(int x, int y)
+unsigned long gc::WindowControl::getPixel(int x, int y)
 {
 	if (this->isInvalid())
 	{
-		cout << "WindowControl::pixel() => isInvalid() -> true" << endl;
-		return INVALID_COLOR;
+		cout << "WindowControl::getPixel() => isInvalid() -> true" << endl;
+		return 0L;
 	}
 	if (!this->dc)
 	{
-		cout << "WindowControl::pixel() => this->dc -> NULL (1)" << endl;
+		cout << "WindowControl::getPixel() => this->dc -> NULL (1)" << endl;
 		this->dc = this->getDC();
 		if (!this->dc)
 		{
-			cout << "WindowControl::pixel() => this->dc -> NULL (2)" << endl;
-			return INVALID_COLOR;
+			cout << "WindowControl::getPixel() => this->dc -> NULL (2)" << endl;
+			return 0L;
 		}
 	}
-	return Color(::GetPixel(this->dc, x, y));
+	return ::GetPixel(this->dc, x, y);
+}
+
+Color WindowControl::pixel(int x, int y)
+{
+	return getPixel(x, y);
 }
 
 
