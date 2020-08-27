@@ -21,6 +21,24 @@ WindowControl::WindowControl()
 	WindowControl((HWND)INVALID_HANDLE_VALUE);
 }
 
+void gc::WindowControl::fromName(const char* className)
+{
+	handle = ::FindWindowA(className, 0);
+	if (handle != 0)
+	{
+		dc = ::GetDC(handle);
+	}
+}
+
+void gc::WindowControl::fromHandle(HWND handle)
+{
+	handle = handle;
+	if (handle != 0 && handle != INVALID_HANDLE_VALUE)
+	{
+		dc = ::GetDC(handle);
+	}
+}
+
 HWND WindowControl::getHandle()
 {
 	return this->handle;

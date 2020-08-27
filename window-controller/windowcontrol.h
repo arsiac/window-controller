@@ -22,6 +22,8 @@ namespace gc {
 
 		WindowControl();
 
+		void fromName(const char* className);
+		void fromHandle(HWND handle);
 		HWND getHandle();
 		HDC getDC();
 		bool releaseDC(HDC hdc);
