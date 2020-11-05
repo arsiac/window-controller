@@ -1,11 +1,19 @@
 # window-controller
 
-#### base on Win32 API
+### base on Win32 API
+- include
+  - `head files`
+- src
+  - `source files`
+- test
+- `makefile`
 
-#### 打包
+#### test
+```shell
+	make test
+```
+
+#### package
 ``` shell
-	# Visudal Studio 生成 window-controller.lib
-	# MinGW 生成 libwindow-controller.a
-	make package
-	pack.bat
+	make
 ```
