@@ -343,3 +343,6 @@ healthchecksdb
 *.o
 *.a
 *.out
+
+#temp
+temp/

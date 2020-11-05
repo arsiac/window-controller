@@ -22,7 +22,7 @@ namespace gc {
 
 		WindowControl();
 
-		void fromName(const char* className);
+		void fromClassName(const char* className);
 		void fromHandle(HWND handle);
 		HWND getHandle();
 		HDC getDC();

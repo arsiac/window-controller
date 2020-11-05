@@ -21,7 +21,7 @@ WindowControl::WindowControl()
 	WindowControl((HWND)INVALID_HANDLE_VALUE);
 }
 
-void gc::WindowControl::fromClassName(const char* className)
+void WindowControl::fromClassName(const char* className)
 {
 	handle = ::FindWindowA(className, 0);
 	if (handle != 0)
@@ -30,7 +30,7 @@ void gc::WindowControl::fromClassName(const char* className)
 	}
 }
 
-void gc::WindowControl::fromHandle(HWND handle)
+void WindowControl::fromHandle(HWND handle)
 {
 	handle = handle;
 	if (handle != 0 && handle != INVALID_HANDLE_VALUE)
@@ -212,7 +212,7 @@ bool WindowControl::moveWindow(Point p, Size s)
 	return this->moveWindow(p.x(), p.y(), s.width(), s.height());
 }
 
-unsigned long gc::WindowControl::getPixel(int x, int y)
+unsigned long WindowControl::getPixel(int x, int y)
 {
 	if (this->isInvalid())
 	{
