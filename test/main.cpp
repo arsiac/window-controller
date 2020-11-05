@@ -6,15 +6,18 @@ int main()
 {
 	using namespace gc;
 	using namespace std;
-	// Messiah_Game
-	WindowControl wc(TEXT("messiah_game"));
+	// NotePad Class Name
+	const char *cname = "NotePad";
+	WindowControl wc(cname);
 	if (wc.useless())
 	{
-		cout << "cannot get window " << wc.getHandle() << endl;
+		cout << "cannot get " << cname << wc.getHandle() << endl;
 		return 1;
 	}
 	cout << "handle: " << wc.getHandle() << endl;
-	HWND hwnd = FindWindow(TEXT("NotePad"), 0);
+
+	// Find Window By API
+	HWND hwnd = FindWindow(cname, 0);
 	cout << "hwnd: " << hwnd << endl;
 
 	RECT rect;

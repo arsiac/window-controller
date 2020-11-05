@@ -19,6 +19,12 @@ ifeq ($(TEMP_DIR), $(wildcard $(TEMP_DIR)))
 	del /q /s temp
 endif
 
+test: prepare
+	g++ -o $(TEMP_DIR)/main \
+	-I $(HEAD_DIR) \
+	-L . \
+	test/main.cpp \
+	-lwc -lgdi32
 
 size.o: prepare
 	g++ -c \
